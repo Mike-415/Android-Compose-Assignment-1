@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
@@ -13,8 +13,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,9 +30,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Box() {
+                    Column {
                         BannerImage()
-                        Title()
+                        Title(getString(R.string.title))
+                        Paragraph1(text = getString(R.string.paragraph_1))
+                        Paragraph2(text = getString(R.string.paragraph_2))
                     }
 
                 }
@@ -40,19 +42,33 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+@Composable
+fun BannerImage(){
+    Image(
+        painter = painterResource(id = R.drawable.img),
+        contentDescription = null
+    )
+}
 @Composable
 fun Title(title: String){
     Text(text = title,
         fontSize = 24.sp,
         modifier = Modifier.padding(16.dp))
 }
+
 @Composable
-fun BannerImage(){
-    Image(
-        painter = painterResource(id = R.drawable.img),
-        contentDescription = null,
-        alignment = Alignment.TopStart
-    )
+fun Paragraph1(text: String){
+    Text(text = text,
+        textAlign = TextAlign.Justify,
+        modifier = Modifier.padding(start = 16.dp, end = 16.dp))
+}
+
+@Composable
+fun Paragraph2(text: String){
+    Text(text = text,
+        textAlign = TextAlign.Justify,
+        modifier = Modifier.padding(16.dp))
 }
 
 @Preview(showBackground = true)
